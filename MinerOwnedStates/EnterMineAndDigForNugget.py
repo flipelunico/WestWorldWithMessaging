@@ -36,9 +36,9 @@ class EnterMineAndDigForNugget(State.StateClass):
         #If he gets thirsty during his digging he packs up work for a while and
         #changes state to go to the saloon for a whiskey.
 
-        Miner.AddToGoldCarried(1);
+        Miner.AddToGoldCarried(1)
 
-        Miner.IncreaseFatigue();
+        Miner.IncreaseFatigue()
 
         print ("Pickin' up a nugget")
 
@@ -48,7 +48,7 @@ class EnterMineAndDigForNugget(State.StateClass):
 
 
         if (Miner.Thirsty()):
-            Miner.ChangeState(QuenchThirst.getInstance())
+            Miner.ChangeState(QuenchThirst.QuenchThirst.getInstance())
 
 
     def Exit(self, Miner):

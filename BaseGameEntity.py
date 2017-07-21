@@ -1,6 +1,5 @@
 import EntityNames
 
-
 class BaseGameEntityClass:
     m_ID = 0
     m_iNextValidID = 0

@@ -1,7 +1,7 @@
 from MinerOwnedStates import State
 from location_type import location_type
-from MinerOwnedStates.GoHomeAndSleepTilRested import GoHomeAndSleepTilRested
-from MinerOwnedStates.EnterMineAndDigForNugget import EnterMineAndDigForNugget
+from MinerOwnedStates import GoHomeAndSleepTilRested
+from MinerOwnedStates import EnterMineAndDigForNugget
 
 
 class VisitBankAndDepositGold(State.StateClass):
@@ -30,18 +30,18 @@ class VisitBankAndDepositGold(State.StateClass):
 
     def Execute(self, Miner):
 
-        #// deposit the gold
+        #deposit the gold
         Miner.AddToWealth(Miner.GoldCarried())
         Miner.SetGoldCarried(0)
         print ("Depositing gold. Total savings now: %d" % Miner.Wealth())
 
-        #// wealthy enough to have a well earned rest?
+        #wealthy enough to have a well earned rest?
         if (Miner.Wealth() >= Miner.ComfortLevel):
             print ("WooHoo! Rich enough for now. Back home to mah li'lle lady")
-            Miner.ChangeState(GoHomeAndSleepTilRested.getInstance())
+            Miner.ChangeState(GoHomeAndSleepTilRested.GoHomeAndSleepTilRested.getInstance())
         else:
-            #// otherwise get more gold
-            Miner.ChangeState(EnterMineAndDigForNugget.getInstance())
+            #otherwise get more gold
+            Miner.ChangeState(EnterMineAndDigForNugget.EnterMineAndDigForNugget.getInstance())
 
     def Exit(self, Miner):
         print("Leavin' the bank")
