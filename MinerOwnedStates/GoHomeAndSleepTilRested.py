@@ -1,25 +1,46 @@
 from MinerOwnedStates import State
+from location_type import location_type
+from MinerOwnedStates import GoHomeAndSleepTilRested
+from MinerOwnedStates.EnterMineAndDigForNugget import EnterMineAndDigForNugget
+from MinerOwnedStates import VisitBankAndDepositGold
+from MinerOwnedStates import QuenchThirst
+
 
 class GoHomeAndSleepTilRested(State.StateClass):
+    # Here will be the instance stored.
+    __instance = None
 
-    def __init__(self, decorated):
-        self._decorated = decorated
+    @staticmethod
+    def getInstance():
+        """ Static access method. """
+        if GoHomeAndSleepTilRested.__instance == None:
+            GoHomeAndSleepTilRested()
+        return GoHomeAndSleepTilRested.__instance
 
-    def Instance(self):
-        """
-        Returns the singleton instance. Upon its first call, it creates a
-        new instance of the decorated class and calls its `__init__` method.
-        On all subsequent calls, the already created instance is returned.
+    def __init__(self):
+        """ Virtually private constructor. """
+        if GoHomeAndSleepTilRested.__instance != None:
+            raise Exception("This class is a singleton!")
+        else:
+            GoHomeAndSleepTilRested.__instance = self
 
-        """
-        try:
-            return self._instance
-        except AttributeError:
-            self._instance = self._decorated()
-            return self._instance
+    def Enter(self, Miner):
 
-    def __call__(self):
-        raise TypeError('Singletons must be accessed through `Instance()`.')
+        if (Miner.Location() != location_type.shack):
+            Miner.ChangeLocation(location_type.shack)
+            print("Walkin' home")
 
-    def __instancecheck__(self, inst):
-        return isinstance(inst, self._decorated)
+    def Execute(self, Miner):
+
+        #if miner is not fatigued start to dig for nuggets again.
+
+        if (Miner.Fatigued()):
+            # sleep
+            Miner.DecreaseFatigue()
+            print("ZZZZ... ")
+        else:
+            print("What a God darn fantastic nap! Time to find more gold")
+            Miner.ChangeState(EnterMineAndDigForNugget.getInstance())
+
+    def Exit(self, Miner):
+        print("Leaving the house")
