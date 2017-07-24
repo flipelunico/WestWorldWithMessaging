@@ -1,6 +1,6 @@
-from MinerOwnedStates import State
-from location_type import location_type
+import State
 from MinerOwnedStates import EnterMineAndDigForNugget
+from location_type import location_type
 
 
 class QuenchThirst(State.StateClass):

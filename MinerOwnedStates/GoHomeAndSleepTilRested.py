@@ -1,9 +1,7 @@
-from MinerOwnedStates import State
-from location_type import location_type
-#from MinerOwnedStates import GoHomeAndSleepTilRested
+import State
+# from MinerOwnedStates import GoHomeAndSleepTilRested
 from MinerOwnedStates.EnterMineAndDigForNugget import EnterMineAndDigForNugget
-from MinerOwnedStates import VisitBankAndDepositGold
-from MinerOwnedStates import QuenchThirst
+from location_type import location_type
 
 
 class GoHomeAndSleepTilRested(State.StateClass):

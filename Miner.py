@@ -11,6 +11,11 @@ class Miner(BaseGameEntityClass):
     TirednessThreshold = 5
 
     m_pCurrentState = None
+    m_pPreviousState = None
+    m_pGlobalState = None
+
+
+
     m_Location = None
 
     m_iGoldCarried = None
@@ -46,6 +51,9 @@ class Miner(BaseGameEntityClass):
 
         # call the entry method of the new state
         m_pCurrentState.Enter(self)
+
+    def RevertToPreviousState(self):
+        None
 
     def Update(self):
         global m_iThirst
