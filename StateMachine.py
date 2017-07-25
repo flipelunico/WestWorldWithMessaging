@@ -1,14 +1,14 @@
 import State
 
-class StateMachine(self):
+class StateMachine:
 
-    m_pOwner
+    m_pOwner = None
 
-    m_pCurrentState
+    m_pCurrentState = None
     #a record of the last state the agent was in
-    m_pPreviousState
+    m_pPreviousState = None
     #this is called every time the FSM is updated
-    m_pGlobalState
+    m_pGlobalState = None
 
     def __init__(self,owner):
         global  m_pOwner,m_pCurrentState,m_pPreviousState,m_pGlobalState

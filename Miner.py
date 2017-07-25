@@ -2,7 +2,7 @@ from BaseGameEntity import BaseGameEntityClass
 import EntityNames
 from location_type import location_type
 from MinerOwnedStates.GoHomeAndSleepTilRested import GoHomeAndSleepTilRested
-
+from StateMachine import StateMachine
 
 class Miner(BaseGameEntityClass):
     ComFortLevel = 5
@@ -27,12 +27,14 @@ class Miner(BaseGameEntityClass):
 
     def __init__(self, EntityNames):
         # super(EntityNames)
-        global m_pCurrentState, m_Location, m_iGoldCarried, m_iMoneyInBank, m_iThirst, m_iFatigue
+        global m_Location, m_iGoldCarried, m_iMoneyInBank, m_iThirst, m_iFatigue
         m_Location = location_type.shack
         m_iGoldCarried = 0
         m_iMoneyInBank = 0
         m_iThirst = 0
         m_iFatigue = 0
+        global m_pStateMachine
+        m_pStateMachine = StateMachine
         m_pStateMachine.SetCurrentState(GoHomeAndSleepTilRested.getInstance()) 
 
     def GetFSM(self):
