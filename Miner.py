@@ -10,12 +10,6 @@ class Miner(BaseGameEntityClass):
     ThirstLevel = 5
     TirednessThreshold = 5
 
-    m_pCurrentState = None
-    m_pPreviousState = None
-    m_pGlobalState = None
-
-
-
     m_Location = None
 
     m_iGoldCarried = None
@@ -28,6 +22,9 @@ class Miner(BaseGameEntityClass):
     MaxNuggets = 3
     ComfortLevel = 5
 
+    #an instance of the state machine class
+    m_pStateMachine = None
+
     def __init__(self, EntityNames):
         # super(EntityNames)
         global m_pCurrentState, m_Location, m_iGoldCarried, m_iMoneyInBank, m_iThirst, m_iFatigue
@@ -36,31 +33,19 @@ class Miner(BaseGameEntityClass):
         m_iMoneyInBank = 0
         m_iThirst = 0
         m_iFatigue = 0
-        m_pCurrentState = GoHomeAndSleepTilRested.getInstance()
+        m_pStateMachine.SetCurrentState(GoHomeAndSleepTilRested.getInstance()) 
 
-    def ChangeState(self, State):
-        global m_pCurrentState
-        # make sure both states are both valid before attempting to
-        # call their methods
-
-        # call the exit method of the existing state
-        m_pCurrentState.Exit(self)
-
-        # change state to the new state
-        m_pCurrentState = State
-
-        # call the entry method of the new state
-        m_pCurrentState.Enter(self)
+    def GetFSM(self):
+        global m_pStateMachine
+        return m_pStateMachine
 
     def RevertToPreviousState(self):
         None
 
     def Update(self):
-        global m_iThirst
+        global m_iThirst, m_pStateMachine
         m_iThirst += 1
-
-        if (m_pCurrentState):
-            m_pCurrentState.Execute(self)
+        m_pStateMachine.Update()
 
     def AddToGoldCarried(self, val):
         global m_iGoldCarried

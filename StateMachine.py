@@ -58,9 +58,9 @@ class StateMachine(self):
 
     #returns true if the current state's type is equal to the type of the
     #class passed as a parameter.
-    def isInState(State) {
-        #System.out.println(m_pCurrentState.getClass());
-        return m_pCurrentState.getClass() == st.getClass();
-    }
+    def isInState(State):
+        #System.out.println(m_pCurrentState.getClass())
+        return m_pCurrentState.__name__ == State.__name__
+
 
 
