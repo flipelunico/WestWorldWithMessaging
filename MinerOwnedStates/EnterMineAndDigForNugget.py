@@ -43,11 +43,11 @@ class EnterMineAndDigForNugget(State.StateClass):
 
         #if enough gold mined, go and put it in the bank
         if (Miner.PocketsFull()):
-            Miner.ChangeState(VisitBankAndDepositGold.getInstance())
+            Miner.GetFSM().ChangeState(VisitBankAndDepositGold.getInstance())
 
 
         if (Miner.Thirsty()):
-            Miner.ChangeState(QuenchThirst.QuenchThirst.getInstance())
+            Miner.GetFSM().ChangeState(QuenchThirst.QuenchThirst.getInstance())
 
 
     def Exit(self, Miner):

@@ -1,4 +1,4 @@
-import State
+from State import StateClass
 
 class StateMachine:
 
@@ -18,13 +18,17 @@ class StateMachine:
         m_pPreviousState = None
         m_pGlobalState = None
 
-    def SetCurrentState(self,State):
+    def SetGlobalState(self,StateClass):
         global  m_pGlobalState
-        m_pGlobalState = State;
+        m_pGlobalState = StateClass
 
-    def SetPreviousState(self,State):
+    def SetCurrentState(self, StateClass):
+        global m_pCurrentState
+        m_pCurrentState = StateClass
+
+    def SetPreviousState(self,StateClass):
         global m_pPreviousState
-        m_pPreviousState = State
+        m_pPreviousState = StateClass
 
     def Update(self):
         global m_pGlobalState,m_pCurrentState
@@ -37,7 +41,7 @@ class StateMachine:
         if (m_pCurrentState != None):
             m_pCurrentState.Execute(m_pOwner)
 
-    def ChangeState(self,State):
+    def ChangeState(self,StateClass):
         global m_pPreviousState, m_pCurrentState
 
         #keep a record of the previous state
@@ -47,7 +51,7 @@ class StateMachine:
         m_pCurrentState.Exit(m_pOwner)
 
         #change state to the new state
-        m_pCurrentState = State
+        m_pCurrentState = StateClass
 
         #call the entry method of the new state
         m_pCurrentState.Enter(m_pOwner)

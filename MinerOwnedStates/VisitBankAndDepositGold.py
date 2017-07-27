@@ -38,10 +38,10 @@ class VisitBankAndDepositGold(State.StateClass):
         #wealthy enough to have a well earned rest?
         if (Miner.Wealth() >= Miner.ComfortLevel):
             print ("WooHoo! Rich enough for now. Back home to mah li'lle lady")
-            Miner.ChangeState(GoHomeAndSleepTilRested.GoHomeAndSleepTilRested.getInstance())
+            Miner.GetFSM().ChangeState(GoHomeAndSleepTilRested.GoHomeAndSleepTilRested.getInstance())
         else:
             #otherwise get more gold
-            Miner.ChangeState(EnterMineAndDigForNugget.EnterMineAndDigForNugget.getInstance())
+            Miner.GetFSM().ChangeState(EnterMineAndDigForNugget.EnterMineAndDigForNugget.getInstance())
 
     def Exit(self, Miner):
         print("Leavin' the bank")

@@ -34,7 +34,7 @@ class QuenchThirst(State.StateClass):
             Miner.BuyAndDrinkAWhiskey()
             print("That's mighty fine sippin liquer")
 
-            Miner.ChangeState(EnterMineAndDigForNugget.EnterMineAndDigForNugget.getInstance());
+            Miner.GetFSM().ChangeState(EnterMineAndDigForNugget.EnterMineAndDigForNugget.getInstance());
         else:
             print("\nERROR!\nERROR!\nERROR!")
 

@@ -38,7 +38,7 @@ class GoHomeAndSleepTilRested(State.StateClass):
             print("ZZZZ... ")
         else:
             print("What a God darn fantastic nap! Time to find more gold")
-            Miner.ChangeState(EnterMineAndDigForNugget.getInstance())
+            Miner.GetFSM().ChangeState(EnterMineAndDigForNugget.getInstance())
 
     def Exit(self, Miner):
         print("Leaving the house")

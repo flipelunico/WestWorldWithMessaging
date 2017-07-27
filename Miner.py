@@ -34,7 +34,7 @@ class Miner(BaseGameEntityClass):
         m_iThirst = 0
         m_iFatigue = 0
         global m_pStateMachine
-        m_pStateMachine = StateMachine
+        m_pStateMachine = StateMachine(self)
         m_pStateMachine.SetCurrentState(GoHomeAndSleepTilRested.getInstance()) 
 
     def GetFSM(self):
