@@ -58,7 +58,7 @@ class StateMachine:
 
     def RevertToPreviousState(self):
         global m_pPreviousState
-        ChangeState(m_pPreviousState)
+        self.ChangeState(m_pPreviousState)
 
     #returns true if the current state's type is equal to the type of the
     #class passed as a parameter.

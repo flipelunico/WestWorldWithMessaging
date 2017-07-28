@@ -1,18 +1,19 @@
 from BaseGameEntity import BaseGameEntityClass
-import EntityNames
 from location_type import location_type
-from MinerOwnedStates.GoHomeAndSleepTilRested import GoHomeAndSleepTilRested
+from MinersWifeOwnedStates.DoHouseWork import DoHouseWork
+from MinersWifeOwnedStates.WifesGlobalState import WifesGlobalState
+from StateMachine import StateMachine
 
-
-class Miner(BaseGameEntityClass):
+class MinersWife(BaseGameEntityClass):
     m_Location = None
     #an instance of the state machine class
     m_pStateMachine = None
 
     def __init__(self, EntityNames):
         # super(EntityNames)
-        global m_pCurrentState, m_Location
+        global m_pCurrentState, m_Location, m_pStateMachine
         m_Location = location_type.shack
+        m_pStateMachine = StateMachine(self)
         m_pStateMachine.SetCurrentState(DoHouseWork.getInstance())
         m_pStateMachine.SetGlobalState(WifesGlobalState.getInstance())
 
