@@ -11,8 +11,9 @@ class BaseGameEntityClass:
         m_ID = val
         m_iNextValidID = m_ID + 1
 
+    @staticmethod
     def Update():
         null
-
-    def ID():
+    
+    def getID():
         return m_ID

@@ -1,6 +1,7 @@
 from State import StateClass
+from EntityNames import EntityNames
 
-class StateMachine:
+class StateMachine(object):
 
     m_pOwner = None
 
@@ -10,7 +11,13 @@ class StateMachine:
     #this is called every time the FSM is updated
     m_pGlobalState = None
 
-    def __init__(self,owner):
+    @staticmethod
+    def __init__(owner):
+        
+        #print("Instancia de Statemachine: ",self )
+        #print("Owner ID : ", owner.getID)
+        #print("Instancia de Owner: ", EntityNames.GetNameOfEntity(owner.getID))
+        
         global  m_pOwner,m_pCurrentState,m_pPreviousState,m_pGlobalState
 
         m_pOwner = owner
@@ -18,20 +25,30 @@ class StateMachine:
         m_pPreviousState = None
         m_pGlobalState = None
 
-    def SetGlobalState(self,StateClass):
+    @staticmethod
+    def SetGlobalState(StateClass):
         global  m_pGlobalState
         m_pGlobalState = StateClass
 
-    def SetCurrentState(self, StateClass):
+    @staticmethod
+    def SetCurrentState(StateClass):
         global m_pCurrentState
+        print("CurrentState: ", m_pCurrentState)
+        print("Cambiado a estado: " ,StateClass)
         m_pCurrentState = StateClass
 
-    def SetPreviousState(self,StateClass):
+    @staticmethod
+    def SetPreviousState(StateClass):
         global m_pPreviousState
         m_pPreviousState = StateClass
 
+    #@staticmethod
     def Update(self):
         global m_pGlobalState,m_pCurrentState
+        
+        print("########### LLAMADO A UPDATE ###########" , self)
+        print("Global State: ", m_pGlobalState)
+        print("Current State: ",m_pCurrentState)
 
         #if a global state exists, call its execute method, else do nothing
         if (m_pGlobalState != None):

@@ -14,8 +14,9 @@ class MinersWife(BaseGameEntityClass):
         global m_pCurrentState, m_Location, m_pStateMachine
         m_Location = location_type.shack
         m_pStateMachine = StateMachine(self)
-        m_pStateMachine.SetCurrentState(DoHouseWork.getInstance())
-        m_pStateMachine.SetGlobalState(WifesGlobalState.getInstance())
+        print("Statemachine para wife: ", m_pStateMachine)
+        self.m_pStateMachine.SetCurrentState(DoHouseWork.getInstance())
+        self.m_pStateMachine.SetGlobalState(WifesGlobalState.getInstance())
 
     def GetFSM(self):
         global m_pStateMachine

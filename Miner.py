@@ -35,6 +35,7 @@ class Miner(BaseGameEntityClass):
         m_iFatigue = 0
         global m_pStateMachine
         m_pStateMachine = StateMachine(self)
+        print("Statemachine para miner: ", m_pStateMachine)
         m_pStateMachine.SetCurrentState(GoHomeAndSleepTilRested.getInstance()) 
 
     def GetFSM(self):
@@ -47,6 +48,7 @@ class Miner(BaseGameEntityClass):
     def Update(self):
         global m_iThirst, m_pStateMachine
         m_iThirst += 1
+        print("Llamando a Update StateMachine Instancia: ", m_pStateMachine)
         m_pStateMachine.Update()
 
     def AddToGoldCarried(self, val):

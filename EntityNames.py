@@ -11,9 +11,11 @@ class EntityNames(Enum):
         m_ID = pID
 
     def GetNameOfEntity(n):
+        print("Valor de entidad: ",n)
         if (n == 0):
             return "Miner Bob"
         elif (n == 1):
             return "ELSA"
         else:
             return "UNKNOWN!"
+        
