@@ -2,86 +2,54 @@ from State import StateClass
 from EntityNames import EntityNames
 
 class StateMachine(object):
-
     m_pOwner = None
-
     m_pCurrentState = None
-    #a record of the last state the agent was in
+    # a record of the last state the agent was in
     m_pPreviousState = None
-    #this is called every time the FSM is updated
+    # this is called every time the FSM is updated
     m_pGlobalState = None
 
-    @staticmethod
-    def __init__(owner):
-        
-        #print("Instancia de Statemachine: ",self )
-        #print("Owner ID : ", owner.getID)
-        #print("Instancia de Owner: ", EntityNames.GetNameOfEntity(owner.getID))
-        
-        global  m_pOwner,m_pCurrentState,m_pPreviousState,m_pGlobalState
+    def __init__(self, owner):
+        self.m_pOwner = owner
+        self.m_pCurrentState = None
+        self.m_pPreviousState = None
+        self.m_pGlobalState = None
 
-        m_pOwner = owner
-        m_pCurrentState = None
-        m_pPreviousState = None
-        m_pGlobalState = None
+    def SetGlobalState(self, StateClass):
+        self.m_pGlobalState = StateClass
 
-    @staticmethod
-    def SetGlobalState(StateClass):
-        global  m_pGlobalState
-        m_pGlobalState = StateClass
+    def SetCurrentState(self, StateClass):
+        self.m_pCurrentState = StateClass
 
-    @staticmethod
-    def SetCurrentState(StateClass):
-        global m_pCurrentState
-        print("CurrentState: ", m_pCurrentState)
-        print("Cambiado a estado: " ,StateClass)
-        m_pCurrentState = StateClass
+    def SetPreviousState(self, StateClass):
+        self.m_pPreviousState = StateClass
 
-    @staticmethod
-    def SetPreviousState(StateClass):
-        global m_pPreviousState
-        m_pPreviousState = StateClass
-
-    #@staticmethod
     def Update(self):
-        global m_pGlobalState,m_pCurrentState
-        
-        print("########### LLAMADO A UPDATE ###########" , self)
-        print("Global State: ", m_pGlobalState)
-        print("Current State: ",m_pCurrentState)
+        # if a global state exists, call its execute method, else do nothing
+        if self.m_pGlobalState is not None:
+            self.m_pGlobalState.Execute(self.m_pOwner)
 
-        #if a global state exists, call its execute method, else do nothing
-        if (m_pGlobalState != None):
-            m_pGlobalState.Execute(m_pOwner)
+        # same for the current state
+        if self.m_pCurrentState is not None:
+            self.m_pCurrentState.Execute(self.m_pOwner)
 
-        #same for the current state
-        if (m_pCurrentState != None):
-            m_pCurrentState.Execute(m_pOwner)
+    def ChangeState(self, StateClass):
+        # keep a record of the previous state
+        self.m_pPreviousState = self.m_pCurrentState
 
-    def ChangeState(self,StateClass):
-        global m_pPreviousState, m_pCurrentState
+        # call the exit method of the existing state
+        self.m_pCurrentState.Exit(self.m_pOwner)
 
-        #keep a record of the previous state
-        m_pPreviousState = m_pCurrentState
+        # change state to the new state
+        self.m_pCurrentState = StateClass
 
-        #call the exit method of the existing state
-        m_pCurrentState.Exit(m_pOwner)
-
-        #change state to the new state
-        m_pCurrentState = StateClass
-
-        #call the entry method of the new state
-        m_pCurrentState.Enter(m_pOwner)
+        # call the entry method of the new state
+        self.m_pCurrentState.Enter(self.m_pOwner)
 
     def RevertToPreviousState(self):
-        global m_pPreviousState
-        self.ChangeState(m_pPreviousState)
+        self.ChangeState(self.m_pPreviousState)
 
-    #returns true if the current state's type is equal to the type of the
-    #class passed as a parameter.
-    def isInState(State):
-        #System.out.println(m_pCurrentState.getClass())
-        return m_pCurrentState.__name__ == State.__name__
-
-
-
+    # returns true if the current state's type is equal to the type of the
+    # class passed as a parameter.
+    def isInState(self, State):
+        return self.m_pCurrentState.__name__ == State.__name__
