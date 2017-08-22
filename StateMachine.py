@@ -1,6 +1,7 @@
 from State import StateClass
 from EntityNames import EntityNames
 
+
 class StateMachine(object):
     m_pOwner = None
     m_pCurrentState = None
@@ -32,6 +33,19 @@ class StateMachine(object):
         # same for the current state
         if self.m_pCurrentState is not None:
             self.m_pCurrentState.Execute(self.m_pOwner)
+
+    def HandleMessage(self, Telegram):
+        # first see if the current state is valid and that it can handle
+        # the message
+        if self.m_pCurrentState != None & self.m_pCurrentState.OnMessage(self.m_pOwner, Telegram):
+            return True
+
+        # if not, and if a global state has been implemented, send
+        # the message to the global state
+        if self.m_pGlobalState != None & self.m_pGlobalState.OnMessage(self.m_pOwner, Telegram):
+            return True
+
+        return False
 
     def ChangeState(self, StateClass):
         # keep a record of the previous state

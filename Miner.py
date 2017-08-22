@@ -1,10 +1,10 @@
-from BaseGameEntity import BaseGameEntityClass
+from BaseGameEntity import BaseGameEntity
 from location_type import location_type
 from MinerOwnedStates.GoHomeAndSleepTilRested import GoHomeAndSleepTilRested
 from StateMachine import StateMachine
+from Messaging import  Telegram
 
-
-class Miner(BaseGameEntityClass):
+class Miner(BaseGameEntity):
     ComFortLevel = 5
     MaxNuggets = 3
     ThirstLevel = 5
@@ -42,10 +42,17 @@ class Miner(BaseGameEntityClass):
     def RevertToPreviousState(self):
         None
 
+    def HandleMessage(self, Telegram):
+        return self.m_pStateMachine.HandleMessage(Telegram)
+
     def Update(self):
         # global m_iThirst, m_pStateMachine
         self.m_iThirst += 1
         self.m_pStateMachine.Update()
+
+    def HandleMessage(self,Telegram):
+        return self.m_pStateMachine.HandleMessage(Telegram)
+
 
     def AddToGoldCarried(self, val):
         self.m_iGoldCarried += val

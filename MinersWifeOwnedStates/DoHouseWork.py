@@ -1,5 +1,11 @@
 from random import randint
+from colorama import init
+from colorama import Fore, Back, Style
 import State
+
+# Init para colorama
+init()
+
 
 class DoHouseWork(State.StateClass):
     # Here will be the instance stored.
@@ -27,12 +33,13 @@ class DoHouseWork(State.StateClass):
         r = randint(0, 9)
 
         if r == 0:
-            print("Wife : Moppin' the floor")
+            print(Fore.RED + "Wife : Moppin' the floor")
         elif r == 1:
-            print("Wife : Washin' the dishes")
+            print(Fore.RED + "Wife : Washin' the dishes")
         elif r == 3:
-            print("Wife : Makin' the bed")
+            print(Fore.RED + "Wife : Makin' the bed")
 
+        #print(Style.RESET_ALL)
 
     def Exit(self, MinersWife):
         None

@@ -1,11 +1,11 @@
-from BaseGameEntity import BaseGameEntityClass
+from BaseGameEntity import BaseGameEntity
 from location_type import location_type
 from MinersWifeOwnedStates.DoHouseWork import DoHouseWork
 from MinersWifeOwnedStates.WifesGlobalState import WifesGlobalState
 from StateMachine import StateMachine
 
 
-class MinersWife(BaseGameEntityClass):
+class MinersWife(BaseGameEntity):
     m_Location = None
     # an instance of the state machine class
     m_pStateMachine = None
