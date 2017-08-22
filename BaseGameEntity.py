@@ -5,15 +5,15 @@ class BaseGameEntity:
     m_iNextValidID = 0
 
     def __init__(self, Entitynames):
-        SetID(Entityname.id)
+        self.SetID(Entitynames.id)
 
-    def SetID(val):
-        m_ID = val
-        m_iNextValidID = m_ID + 1
+    def SetID(self,val):
+        self.m_ID = val
+        self.m_iNextValidID = self.m_ID + 1
 
     @staticmethod
     def Update():
-        null
+        None
     
-    def getID():
-        return m_ID
+    def getID(self):
+        return self.m_ID

@@ -2,7 +2,7 @@ import State
 # from MinerOwnedStates import GoHomeAndSleepTilRested
 from MinerOwnedStates.EnterMineAndDigForNugget import EnterMineAndDigForNugget
 from location_type import location_type
-from Messaging import MessageDispatcher
+from Messaging.MessageDispatcher import MessageDispatcher
 from Messaging import MessageTypes
 from EntityNames import EntityNames
 
@@ -34,7 +34,7 @@ class GoHomeAndSleepTilRested(State.StateClass):
             # let the wife know I'm home
             MessageDispatcher.getInstance().DispatchMessage(MessageDispatcher.getInstance().SEND_MSG_IMMEDIATELY,
                                                             # time delay
-                                                            Miner.ID(),  # ID of sender
+                                                            Miner.getID(),  # ID of sender
                                                             EntityNames.ent_Elsa.id,  # ID of recipient
                                                             MessageTypes.Msg_HiHoneyImHome,  # the message
                                                             MessageDispatcher.getInstance().NO_ADDITIONAL_INFO)
