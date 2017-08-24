@@ -25,9 +25,12 @@ class EntityManager(object):
 
     def GetEntityFromID(self,pid):
          #find the entity
-         assert isinstance(pid,self.m_EntityMap)
+         #assert isinstance(pid,self.m_EntityMap)
+         #print("Get Entity PID: ", pid)
+         default = "Vacio"
+         print(self.m_EntityMap.get(0, default))
+         print(self.m_EntityMap.get(1, default))
          return self.m_EntityMap[pid]
-
 
     def RemoveEntity(self, pEntity):
         for pid, BaseGameEntity in self.m_EntityMap.items():
@@ -35,5 +38,7 @@ class EntityManager(object):
                 del dict[pid]
 
     def RegisterEntity(self, NewEntity):
+        print("Registrando entidad con PID: ", self.m_pid)
+        #self.m_EntityMap = {self.m_pid: NewEntity}
+        self.m_EntityMap[self.m_pid] = NewEntity
         self.m_pid += 1
-        self.m_EntityMap[self.m_pid]: NewEntity

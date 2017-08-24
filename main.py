@@ -12,9 +12,9 @@ Elsa = MinersWife(EntityNames.ent_Elsa)
 
 
 #register them with the entity manager
-EntityMgr = EntityManager()
-EntityMgr.RegisterEntity(Bob)
-EntityMgr.RegisterEntity(Elsa)
+#EntityMgr = EntityManager()
+EntityManager.getInstance().RegisterEntity(Bob)
+EntityManager.getInstance().RegisterEntity(Elsa)
 
 for x in range(0, 20):
     Bob.Update()
